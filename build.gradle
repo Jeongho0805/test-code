@@ -42,6 +42,15 @@ jacocoTestReport {
             destination file('build/reports/myReport.html')
         }
     }
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it,
+                    exclude: [
+                            'com/test/domain/**',
+                            '**/TestApplication.class'
+                    ])
+        }))
+    }
 }
 
 tasks.named('test') {
