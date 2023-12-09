@@ -16,4 +16,11 @@ public class MemberService {
     public void saveMember(final String name, final int age) {
         memberRepository.save(new Member(name, age));
     }
+
+    public String findMemberName(final Long id) {
+        Member member = memberRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+        return member.getName();
+    }
+
+    public void
 }
