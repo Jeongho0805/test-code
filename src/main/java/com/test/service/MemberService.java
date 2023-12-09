@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -13,8 +15,8 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
 
-    public void saveMember(final String name, final int age) {
-        memberRepository.save(new Member(name, age));
+    public Member saveMember(final String name, final int age) {
+        return memberRepository.save(new Member(name, age));
     }
 
     public String findMemberName(final Long id) {
@@ -22,5 +24,8 @@ public class MemberService {
         return member.getName();
     }
 
-    public void
+    public void plusAgeAllMember() {
+        List<Member> members = memberRepository.findAll();
+        members.forEach(Member::plusAge);
+    }
 }
