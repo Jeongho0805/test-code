@@ -1,4 +1,4 @@
-package com.test.repository;
+package com.test.unit.repository;
 
 import com.test.domain.Member;
 import com.test.respotiroy.MemberRepository;

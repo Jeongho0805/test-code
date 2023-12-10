@@ -1,6 +1,7 @@
 package com.test.service;
 
 import com.test.domain.Member;
+import com.test.dto.MemberDto;
 import com.test.respotiroy.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,18 @@ public class MemberService {
 
     public void plusAgeAllMember() {
         List<Member> members = memberRepository.findAll();
-        members.forEach(Member::plusAge);
+        members.forEach(this::plusAge);
+    }
+
+    private void plusAge(Member member) {
+        if (member.getName() == "jeongho") {
+            return;
+        }
+        member.plusAge();
+    }
+
+    public MemberDto findMember(Long memberId) {
+        Member member = memberRepository.findById(memberId).orElseThrow(IllegalArgumentException::new);
+        return MemberDto.of(member);
     }
 }

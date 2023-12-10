@@ -1,7 +1,8 @@
-package com.test.service;
+package com.test.unit.service;
 
 import com.test.domain.Member;
 import com.test.respotiroy.MemberRepository;
+import com.test.service.MemberService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -60,5 +61,16 @@ public class MemberServiceTest {
 
         assertThat(member1.getAge()).isEqualTo(21);
         assertThat(member2.getAge()).isEqualTo(26);
+    }
+
+    @Test
+    @DisplayName("이름이 'jeongho' 이면 나이를 먹지 않는다.")
+    void jeonghoIsNotAging() {
+        Member member = new Member("jeongho", 28);
+        when(memberRepository.findAll()).thenReturn(List.of(member));
+
+        memberService.plusAgeAllMember();
+
+        assertThat(member.getAge()).isEqualTo(28);
     }
 }
