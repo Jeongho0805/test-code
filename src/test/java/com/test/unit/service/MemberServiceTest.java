@@ -1,6 +1,7 @@
 package com.test.unit.service;
 
 import com.test.domain.Member;
+import com.test.dto.MemberDto;
 import com.test.respotiroy.MemberRepository;
 import com.test.service.MemberService;
 import org.junit.jupiter.api.DisplayName;
@@ -71,6 +72,17 @@ public class MemberServiceTest {
 
         memberService.plusAgeAllMember();
 
+        assertThat(member.getAge()).isEqualTo(28);
+    }
+
+    @Test
+    @DisplayName("회원 Id를 바탕으로 회원을 찾을 수 있다.")
+    void findMemberById() {
+        when(memberRepository.findById(1L)).thenReturn(Optional.of(new Member("hoya", 28)));
+
+        MemberDto member = memberService.findMember(1L);
+
+        assertThat(member.getName()).isEqualTo("hoya");
         assertThat(member.getAge()).isEqualTo(28);
     }
 }
