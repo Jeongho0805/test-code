@@ -85,4 +85,6 @@ public class MemberServiceTest {
         assertThat(member.getName()).isEqualTo("hoya");
         assertThat(member.getAge()).isEqualTo(28);
     }
+
+
 }
